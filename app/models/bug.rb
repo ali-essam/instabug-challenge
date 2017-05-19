@@ -1,3 +1,3 @@
 class Bug < ApplicationRecord
-  # belongs_to :state
+  has_one :state
 end

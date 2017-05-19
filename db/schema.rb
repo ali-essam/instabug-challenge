@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515203819) do
+ActiveRecord::Schema.define(version: 20170519181558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,8 @@ ActiveRecord::Schema.define(version: 20170515203819) do
     t.string "status"
     t.string "priority"
     t.text "comment"
-    t.bigint "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["state_id"], name: "index_bugs_on_state_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -32,9 +30,11 @@ ActiveRecord::Schema.define(version: 20170515203819) do
     t.string "os"
     t.integer "memory"
     t.integer "storage"
+    t.bigint "bug_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bug_id"], name: "index_states_on_bug_id"
   end
 
-  add_foreign_key "bugs", "states"
+  add_foreign_key "states", "bugs"
 end

@@ -5,6 +5,7 @@ class CreateStates < ActiveRecord::Migration[5.1]
       t.string :os
       t.integer :memory
       t.integer :storage
+      t.references :bug, foreign_key: true
 
       t.timestamps
     end
