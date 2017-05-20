@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+  # Our PostgreSQL service:
+  postgres:
+    image: postgres:9.6-alpine
+    volumes:
+      # We'll mount the 'postgres-data' volume into the location Postgres stores it's data:
+      - ./volumes/postgres-data:/var/lib/postgresql/data
+
+  # Our Redis service:
+  redis:
+    image: redis:3.2.4-alpine
+    volumes:
+      # We'll mount the 'redis-data' volume into the location redis stores it's data:
+      - ./volumes/redis-data:/var/lib/redis
+    command: redis-server --appendonly yes
+
+  rabbitmq:
+    image: rabbitmq:3.6.9-alpine
+    volumes:
+      - ./volumes/rabbitmq:/var/lib/rabbitmq
+
+  es:
+    image: elasticsearch:5.4.0-alpine
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./volumes/es:/usr/share/elasticsearch/data
+
+  web:
+    build: .
+    command: sh -c "sh ./init.sh && rails s -p 3000 -b '0.0.0.0'"
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+      - redis
+      - es
+      - rabbitmq
+    environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+      - ES_HOST=es

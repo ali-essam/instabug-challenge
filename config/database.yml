@@ -99,7 +99,7 @@ test:
 production:
   <<: *default
   database: instaapi_production
-  username: instaapi
-  password: password1 #<%= ENV['INSTAAPI_DATABASE_PASSWORD'] %>
-  host: localhost
+  username: <%= ENV['POSTGRES_HOST'] %>
+  password: #<%= ENV['INSTAAPI_DATABASE_PASSWORD'] %>
+  host: postgres
   port: 5432
