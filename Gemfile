@@ -55,5 +55,8 @@ end
 
 gem 'bunny'
 gem 'sneakers'
+
 gem 'redis', '~>3.2'
 gem 'redis-namespace'
+
+gem 'elasticsearch-model'

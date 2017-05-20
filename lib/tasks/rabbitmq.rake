@@ -1,8 +1,6 @@
 namespace :rabbitmq do
   desc "Setup routing"
-  task :setup do
-    require "bunny"
-
+  task :setup => :environment do
     conn = Bunny.new
     conn.start
 
