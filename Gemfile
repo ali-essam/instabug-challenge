@@ -52,3 +52,8 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
 end
+
+gem 'bunny'
+gem 'sneakers'
+gem 'redis', '~>3.2'
+gem 'redis-namespace'
