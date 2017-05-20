@@ -4,6 +4,7 @@ services:
   # Our PostgreSQL service:
   postgres:
     image: postgres:9.6-alpine
+    restart: always
     volumes:
       # We'll mount the 'postgres-data' volume into the location Postgres stores it's data:
       - ./volumes/postgres-data:/var/lib/postgresql/data
@@ -11,6 +12,7 @@ services:
   # Our Redis service:
   redis:
     image: redis:3.2.4-alpine
+    restart: always
     volumes:
       # We'll mount the 'redis-data' volume into the location redis stores it's data:
       - ./volumes/redis-data:/var/lib/redis
@@ -18,11 +20,13 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.6.9-alpine
+    restart: always
     volumes:
       - ./volumes/rabbitmq:/var/lib/rabbitmq
 
   es:
     image: elasticsearch:5.4.0-alpine
+    restart: always
     ports:
       - "9200:9200"
     volumes:
@@ -42,6 +46,26 @@ services:
       - es
       - rabbitmq
     environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+      - ES_HOST=es
+
+  worker:
+    build: .
+    command: rake sneakers:run
+    restart: always
+    volumes:
+      - .:/app
+    links:
+      - postgres
+      - redis
+      - es
+      - rabbitmq
+    depends_on:
+      - web
+    environment:
+      - WORKERS=BugsWorker
       - POSTGRES_HOST=postgres
       - REDIS_HOST=redis
       - RABBITMQ_HOST=rabbitmq

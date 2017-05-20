@@ -1,7 +1,8 @@
+# FIXME: Implement correct logic
 namespace :rabbitmq do
   desc "Setup routing"
   task :setup => :environment do
-    conn = Bunny.new
+    conn = $bunny
     conn.start
 
     ch = conn.create_channel
