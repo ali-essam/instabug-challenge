@@ -8,8 +8,8 @@ FROM ruby:2.4-slim
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends postgresql-client \
-  build-essential patch ruby-dev zlib1g-dev liblzma-dev
-RUN apt-get -y --no-install-recommends install libpq-dev
+  build-essential patch ruby-dev zlib1g-dev liblzma-dev libpq-dev \
+  curl
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
