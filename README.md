@@ -34,7 +34,7 @@ The requirements:
 2. List of commands to test the app **[Done > Below]**
 3. Elasticsearch with partial filtering for comments field (All fields should match exactly except `comment` which should allow partial matching. similar to Mysql like query '%XYZ%'. Don't use the wildcard/regexp query.) **[DONE]**
 4. The `POST /bugs` endpoint doesn't need to write to the DB directly, but instead it should relay the insertion to RabbitMQ worker and use a consumer to process the published jobs in RabbitMQ, but it should still respond with the correct bug number. Make sure that bugs for the same application don't get duplicate numbers if two bugs are getting processed in the same time. **[DONE]**
-5. Create an endpoint `GET /bugs/[number]`, which fetches the bug using the number and application token, and returns the attributes in a JSON **[DONE?]**. Adjust the database indices to minimize the response time. **[TODO]**
+5. Create an endpoint `GET /bugs/[number]`, which fetches the bug using the number and application token, and returns the attributes in a JSON **[DONE]**. Adjust the database indices to minimize the response time. **[TODO]**
 
 Bonus:
 - Write specs to test the endpoints, add happy and unhappy scenarios. **[TODO]**
