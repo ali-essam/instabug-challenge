@@ -14,6 +14,6 @@ class Publisher
       q.bind("instaapi.bugs")
     end
     # and simply publish message
-    @@fanout.publish(message.to_json)
+    @@fanout.publish(message)
   end
 end

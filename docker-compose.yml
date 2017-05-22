@@ -28,7 +28,7 @@ services:
     image: elasticsearch:5.4.0-alpine
     restart: always
     ports:
-      - "9200:9200"
+      - "9300:9200"
     volumes:
       - ./volumes/es:/usr/share/elasticsearch/data
 
@@ -39,7 +39,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "3000:3000"
+      - "4000:3000"
     links:
       - postgres
       - redis

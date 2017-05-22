@@ -11,10 +11,15 @@ class BugsWorker
   # changes
   def work(raw_post)
     ActiveRecord::Base.connection_pool.with_connection do
-      bug_json = JSON.parse(raw_post)
+      raw_json = JSON.parse(raw_post)
+      state_json = raw_json["state"]
+      bug_json = raw_json.except("state")
       bug = Bug.new(bug_json)
+      state = State.new(state_json)
+      bug.state = state
+      state.bug = bug
       bug.save!
-      puts bug_json
+      puts bug
     end
     ack! # we need to let queue know that message was received
   end
