@@ -38,4 +38,4 @@ The requirements:
 
 Bonus:
 - Write specs to test the endpoints, add happy and unhappy scenarios. **[]**
-- Api versioning. **[]**
+- Api versioning. **[DONE]**

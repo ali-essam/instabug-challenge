@@ -1,4 +1,4 @@
-class BugsController < ApplicationController
+class Api::V1::BugsController < ApplicationController
 
   # GET /bugs
   def index
