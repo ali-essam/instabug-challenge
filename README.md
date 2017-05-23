@@ -2,7 +2,7 @@
 
 I applied at [Instabug](https://instabug.com/) a while ago. I recently received this challenge to work on as part of the process.
 
----
+*P.S: I never used rails nor ruby before now, so you might not find that the code is living to high standards in terms of RoR style.*
 
 ## Challenge Statement
 We will only write `docker-compose up` to run the whole stack if it doesn’t work the task fails.
